@@ -63,10 +63,10 @@ clean:
 
 # Display the resulting document
 .PHONY: view
-view: $(DVI_FILE)
+view: all
 	$(VIEWER) $(DVI_FILE)
 
 # Print number of words written and how much needs yet to be written
 .PHONY: wordcount
 wordcount: $(TEX_FILE)
-	printf '%d (%d%%)' $(WORD_COUNT) $$(( $(WORD_COUNT) * 100 / $(WORD_COUNT_TARGET) ))
+	printf 'Word count: %d/%d (%d%%)' $(WORD_COUNT) $(WORD_COUNT_TARGET) $$(( $(WORD_COUNT) * 100 / $(WORD_COUNT_TARGET) ))
