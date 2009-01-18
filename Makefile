@@ -20,6 +20,8 @@ BIBTEX = bibtex
 BASE = computer-systems-phishing-formative
 TEX_FILE = $(BASE).tex
 DVI_FILE = $(BASE).dvi
+POSTSCRIPT_FILE = $(BASE).ps
+PDF_FILE = $(BASE).pdf
 BIBTEX_DATA = references.bib
 
 # Programs
@@ -37,29 +39,59 @@ VIEWER = xdvi -geometry -0-0 # Bottom right corner
 WORD_COUNT = $(shell untex -eo - < $(TEX_FILE) | wc -w)
 WORD_COUNT_TARGET = 600
 
+PNG_RESOLUTION = 300  # dpi
+DVIPNG = dvipng -D$(PNG_RESOLUTION)
+
+
 # Just make all by default, and display the result
 .PHONY: default
 default: view
 
 # Make everything
 .PHONY: all
-all: $(DVI_FILE) wordcount
+all: $(DVI_FILE) $(POSTSCRIPT_FILE) $(PDF_FILE) wordcount
 
 # Make the DVI file
+.PHONY: dvi
+dvi: $(DVI_FILE)
 $(DVI_FILE): $(TEX_FILE) $(BIBTEX_DATA)
 	$(LATEX)	$(TEX_FILE)
 	$(BIBTEX)	$(BASE)
 	$(LATEX)	$(TEX_FILE)
 	$(LATEX)	$(TEX_FILE)
 
+# Make the PostScript file
+.PHONY: ps
+ps: $(POSTSCRIPT_FILE)
+$(POSTSCRIPT_FILE): $(DVI_FILE)
+	dvips $(DVI_FILE)
+
+# Make the PDF file
+.PHONY: pdf
+pdf: $(PDF_FILE)
+$(PDF_FILE): $(DVI_FILE)
+	dvipdf $(DVI_FILE)
+
+# Distill one PNG for every page — to be pasted into a Microsoft Word document
+.PHONY: pngs
+pngs: $(DVI_FILE)
+	#rm -rf -- $(PNG_DIRECTORY)
+	#mkdir -- $(PNG_DIRECTORY)
+	$(DVIPNG) $(BASE).dvi
+
 # Remove all that can be re-made
 .PHONY: clean
 clean:
 	rm -f -- $(DVI_FILE)
+	rm -f -- $(POSTSCRIPT_FILE)
+	rm -f -- $(PDF_FILE)
 	rm -f -- $(BASE).aux
 	rm -f -- $(BASE).log
 	rm -f -- $(BASE).bbl
 	rm -f -- $(BASE).blg
+	# dvipng(1) names the files according to the source file basename:
+	# FOO.dvi -> FOO<page_number>.png
+	rm -f -- $(BASE)?*.png
 
 # Display the resulting document
 .PHONY: view
