@@ -36,7 +36,7 @@ VIEWER = xdvi  # Is not in $PATH
 .PHONY: default
 default: $(DVI_FILE)
 
-$(DVI_FILE): $(SOURCE_TEX) $(BIBTEX_DATA)
+$(DVI_FILE): $(TEX_FILE) $(BIBTEX_DATA)
 	$(LATEX)	$(TEX_FILE)
 	$(BIBTEX)	$(BASE)
 	$(LATEX)	$(TEX_FILE)
