@@ -1,0 +1,7 @@
+Phishing scam - emails requesting your password
+
+Recently there have been a number of e-mails claiming to originate from Durham University Helpdesk (Service Desk), requesting user account and password confirmation. These e-mails are from external hackers. A number of individuals have responded to these requests and their username and password have been used to send thousands of spam e-mails to other institutions.You should NEVER send your username or password via e-mail to anybody. The Service Desk will NEVER request your username or password by e-mail.
+
+There maybe occasions when reporting a problem to the Service Desk, that you will be asked for your username and password to aid with remediation. The key thing is that you initiated the contact and not the Service Desk staff. The Service Desk will NEVER request that you confirm your account status via e-mail.
+
+If you receive an e-mail that requests your username and password, just delete it. It\u2019s the safest course of action.
