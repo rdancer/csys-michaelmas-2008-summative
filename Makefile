@@ -31,7 +31,7 @@ BIBTEX_DATA = references.bib
 # — also, xdg-mime(1).  But it didn't really work, so fuck it!
 #VIEWER = /usr/lib/kde4/bin/okular  # Is not in $PATH
 	# Too slow
-VIEWER = xdvi  # Is not in $PATH
+VIEWER = xdvi -geometry -0-0 # Bottom right corner
 
 # untex(1) is not really precise.  The word count is give or take few words.
 WORD_COUNT = $(shell untex -eo - < $(TEX_FILE) | wc -w)
