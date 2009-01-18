@@ -20,7 +20,7 @@ BIBTEX = bibtex
 BASE = computer-systems-phishing-formative
 TEX_FILE = $(BASE).tex
 DVI_FILE = $(BASE).dvi
-BIBTEX_DATA = tau.bib
+BIBTEX_DATA = references.bib
 
 # Programs
 # Is there a way to get this from MIME association database?
