@@ -33,15 +33,26 @@ BIBTEX_DATA = references.bib
 	# Too slow
 VIEWER = xdvi  # Is not in $PATH
 
-.PHONY: default
-default: $(DVI_FILE)
+# untex(1) is not really precise.  The word count is give or take few words.
+WORD_COUNT = $(shell untex -eo - < $(TEX_FILE) | wc -w)
+WORD_COUNT_TARGET = 600
 
+# Just make all by default, and display the result
+.PHONY: default
+default: view
+
+# Make everything
+.PHONY: all
+all: $(DVI_FILE) wordcount
+
+# Make the DVI file
 $(DVI_FILE): $(TEX_FILE) $(BIBTEX_DATA)
 	$(LATEX)	$(TEX_FILE)
 	$(BIBTEX)	$(BASE)
 	$(LATEX)	$(TEX_FILE)
 	$(LATEX)	$(TEX_FILE)
 
+# Remove all that can be re-made
 .PHONY: clean
 clean:
 	rm -f -- $(DVI_FILE)
@@ -50,6 +61,12 @@ clean:
 	rm -f -- $(BASE).bbl
 	rm -f -- $(BASE).blg
 
+# Display the resulting document
 .PHONY: view
 view: $(DVI_FILE)
 	$(VIEWER) $(DVI_FILE)
+
+# Print number of words written and how much needs yet to be written
+.PHONY: wordcount
+wordcount: $(TEX_FILE)
+	printf '%d (%d%%)' $(WORD_COUNT) $$(( $(WORD_COUNT) * 100 / $(WORD_COUNT_TARGET) ))
