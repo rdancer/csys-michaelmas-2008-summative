@@ -25,16 +25,24 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}     
 \usepackage{amssymb}    
+\usepackage{harvard}
 
 
 \author{Jan Minář {\tt <rdancer@rdancer.org>}}
 %\date{November 24, 2008}
-\title{Computer Systems Practical (Week 7--8)\\Phishing\\report}
+
+% No LaTeX command to make a subtitle, but possible using custom code (not
+% including due to absence of license, but it is possible):
+% <http://groups.google.com/group/comp.text.tex/msg/3aa4f67d8b3a979b?hl=en-EN&pli=1>
+\title{Computer Systems Practical (Week 7--8)\\Phishing}
 
 \begin{document}
+\bibliographystyle{agsm}
 
 \maketitle
 
+% Note: This is a ‘report’
+%
 % From the assignment:
 %
 %    You should include:
@@ -45,6 +53,7 @@
 %   	- Technical method; and a
 %   	- Non-technical method
 %    * Reference section
+%
 
 %
 % A general description of phishing
@@ -53,12 +62,10 @@
 \section{What is Phishing?}
 ``In computing, phishing is a form of social engineering, characterised by attempts to fraudulently acquire sensitive information, such as passwords ...'' \cite{gwavanation:phishing-definition}
 
-“Unicode double–quotes”\\
-“non–Unicode double–quotes”
+%
+% A description of an instance of phishing 
+%
 
-%
-% A description of an instance of phishing
-%
 \section{Case Study}
 
 %
@@ -89,7 +96,6 @@
 % References
 %
 
-\bibliographystyle{prsty}
 \bibliography{references}
 
 \end{document}

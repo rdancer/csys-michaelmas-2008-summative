@@ -55,9 +55,6 @@ FILES
     *.bib
 	BibTeX citation source files
 
-    *.bst
-	BibTeX style-sheets
-
     Other files are used/included by the files named above.  See the respective
     source file comments for information on them.
 
