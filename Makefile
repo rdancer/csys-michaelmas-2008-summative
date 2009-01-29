@@ -45,7 +45,7 @@ DVIPNG = dvipng -D$(PNG_RESOLUTION)
 
 # Just make all by default, and display the result
 .PHONY: default
-default: view
+default: all
 
 # Make everything
 .PHONY: all
@@ -97,6 +97,11 @@ clean:
 .PHONY: view
 view: all
 	$(VIEWER) $(DVI_FILE)
+
+# Print on the printer
+.PHONY: hardcopy
+hardcopy: $(DVI_FILE)
+	a2ps -1 $(DVI_FILE)
 
 # Print number of words written and how much needs yet to be written
 .PHONY: wordcount

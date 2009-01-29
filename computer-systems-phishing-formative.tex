@@ -26,6 +26,7 @@
 \usepackage{graphicx}     
 \usepackage{amssymb}    
 \usepackage{harvard}
+\usepackage{url}
 
 
 \author{Jan Minář {\tt <rdancer@rdancer.org>}}
@@ -60,7 +61,16 @@
 %
 
 \section{What is Phishing?}
-``In computing, phishing is a form of social engineering, characterised by attempts to fraudulently acquire sensitive information, such as passwords ...'' \cite{gwavanation:phishing-definition}
+\begin{quote}
+``In computing, phishing is a form of social engineering, characterised by attempts to fraudulently acquire sensitive information, such as passwords [\,\ldots]'' \cite{gwavanation:phishing-definition}
+\end{quote}
+
+\begin{quote}
+``In the field of computer security, phishing is the criminally fraudulent process of attempting to acquire sensitive information such as usernames, passwords and credit card details by masquerading as a trustworthy entity in an electronic communication.'' \cite{wikipedia:Phishing}
+\end{quote}
+
+
+Phishing is defrauding people into sharing valuable information, \ldots using the particular properties of Internet (such as cheap many-to-many communication) and its strengths and weaknesses.  These particular properties shape the form and how phishing on the Internet looks.  This in turn feeds back into how the Internet works, i.e.\ users are more cautious (or maybe the are not?), and financial and other losses are incurred.  Impact of phishing is as with any fraud (phishing is not special---maybe is; the main thing about phishing, it's only virtual, it's only about \textsl{information}, or maybe can be desinformation as well), financial or other loss, loss of confidentiality, integrity, denial of service.  Credentials are gained, facilitating impersonation.
 
 %
 % A description of an instance of phishing 
@@ -68,11 +78,23 @@
 
 \section{Case Study}
 
+\ldots\, get some study from somewhere
+
 %
 % How the network is used and/or effected as a consequence of phishing
 %
 
-\section{How the network is used and/or effected as a consequence of phishing}
+\section{How the network is used and/or affected as a consequence of phishing}
+
+Phishing is particular to the Internet, and the particular weaknesses and strengths, the Internet architecture affects the nature of phishing.  There is a feedback loop.
+
+\begin{enumerate}
+\item Many-to-many
+\item Cheap
+\item Using resources of the victim or 3$^{\textrm{rd}}$ party
+\item Victims have relatively few resources, subject to many attackers
+\item Common personal computer systems are fundamentally insecure \cite{xxx}
+\end{enumerate}
 
 %
 % How to prevent further victims of phishing
@@ -86,11 +108,34 @@
 
 \subsection{Technical method}
 
+\begin{enumerate}
+\item Writing correct programs, without errors---not any time soon, not the trend, and not how the code I have seen looks.  The only 100\% way.
+\item Improved \textsc{GUI} hints, such as the GNOME password input when the whole screen gets a gray tint---something irreproducible without knowledge of the screen contents, which requires read access to the screen video buffer.  Same in Vista.
+\item Embedded secondary trusted display module, such as the Blackberry military \textsc{NSA} replacement \cite{xxx}---it is important that it is quite much simpler than the primary video display, because less complex means easier/cheaper audit.
+\item Separate trusted hardware tokens, such as the \textsc{RSA} fob \cite{xxx}
+\item Blacklists, such as the Google anti-phishing program
+\item Censorship—establishing a proxy which controls the contents available and also logs the attempts.  Similar to blacklists, more intrusive, gathers more information.
+\item Mitigation of risk using by compounding the online channel, i.e.\ micropayments only, chargebacks, policy, centralization of victims i.e.\ creating concentrated loss centres, thus creating few motivated adversaries more capable of assessing risk and countermeasures
+\end{enumerate}
+
 %
 % Non-technical method
 %
 
 \subsection{Non-technical method}
+\begin{enumerate}
+\item User education---experience, is it really useful, how efficient? \cite{xxx}
+\item Law enforcement---complicated by the ubiquity of Internet access and easily obtained relative anonymity/impersonation is easy.  Law enforcement often cite inadequate funds and training \cite{xxx}.  However, private investigators as an industry have taken up this, and are able to deliver investigated ready-to-go cases.  It's not cheap though.
+\end{enumerate}
+
+
+%
+% Conclusion
+%
+
+\section{Conclusion}
+
+We have shown that blah blah blah\ldots\, Also bleh bleh bleh\ldots
 
 %
 % References
