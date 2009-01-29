@@ -17,7 +17,7 @@
 
 LATEX = latex
 BIBTEX = bibtex
-BASE = computer-systems-phishing-formative
+BASE = computer-systems-michaelmas-summative
 TEX_FILE = $(BASE).tex
 DVI_FILE = $(BASE).dvi
 POSTSCRIPT_FILE = $(BASE).ps
@@ -26,18 +26,14 @@ BIBTEX_DATA = references.bib
 
 # Programs
 # Is there a way to get this from MIME association database?
-# — yes:
-# <http://library.gnome.org/devel/gnome-vfs-2.0/unstable/gnome-vfs-20-gnome-vfs-mime-database.html#gnome-vfs-mime-get-default-application>
-# — but who knows how to interface with that.  Not worth the effort, and I
-# don't have the time — rdancer 2009-01-18
-# — also, xdg-mime(1).  But it didn't really work, so fuck it!
+# -- yes: gvfs-open(1x)
 #VIEWER = /usr/lib/kde4/bin/okular  # Is not in $PATH
 	# Too slow
 VIEWER = xdvi -geometry -0-0 # Bottom right corner
 
 # untex(1) is not really precise.  The word count is give or take few words.
 WORD_COUNT = $(shell untex -eo - < $(TEX_FILE) | wc -w)
-WORD_COUNT_TARGET = 600
+WORD_COUNT_TARGET = 1800 # 450 words per question * 4 questions
 
 PNG_RESOLUTION = 300  # dpi
 DVIPNG = dvipng -D$(PNG_RESOLUTION)
@@ -55,10 +51,12 @@ all: $(DVI_FILE) $(POSTSCRIPT_FILE) $(PDF_FILE) wordcount
 .PHONY: dvi
 dvi: $(DVI_FILE)
 $(DVI_FILE): $(TEX_FILE) $(BIBTEX_DATA)
-	$(LATEX)	$(TEX_FILE)
-	$(BIBTEX)	$(BASE)
-	$(LATEX)	$(TEX_FILE)
-	$(LATEX)	$(TEX_FILE)
+	$(LATEX)	$(TEX_FILE)	||:
+	$(BIBTEX)	$(BASE)		||:
+	$(LATEX)	$(TEX_FILE)	||:
+	$(BIBTEX)	$(BASE)		||:
+	$(LATEX)	$(TEX_FILE)	||:
+	$(LATEX)	$(TEX_FILE)	||:
 
 # Make the PostScript file
 .PHONY: ps
@@ -97,6 +95,11 @@ clean:
 .PHONY: view
 view: all
 	$(VIEWER) $(DVI_FILE)
+
+# Display the resulting document, in the background
+.PHONY: view
+viewbg: all
+	($(VIEWER) $(DVI_FILE) >/dev/null 2>&1 &)
 
 # Print on the printer
 .PHONY: hardcopy
