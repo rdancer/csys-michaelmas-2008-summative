@@ -253,29 +253,29 @@ upfront delay while the virtual circuit is set up; latency negligible afterwards
 \end{table} 
 
 
-Table \ref{vcdgcomparison} compiled from data in \cite{kurose},
-\cite[p298--299]{stallings} and \cite{russell}.
+Table \ref{vcdgcomparison} compiled from data in \cite{kurose,russell},
+\cite[p298--299]{stallings}.
 
-Some see it as an advantage that instead of using the (long) address, only the
-(short) Logical Channel Identifier (LCI) is used.  This will save bandwidth,
-complexity and processing power, compared to having to compute the route for
-every datagram. \cite[p158]{russell} (the addresses are only used/needed during
-the initial phase of connection set-up).  However, there are ways to approximate
-these advantages even in datagram networks.
-
-Virtues of the VC technology do not prevent errors in other parts of
-the application.  Properly engineered system will function correctly
-regardless of which of the two approaches is used \cite[p161]{russell}
-
-Some applications can not take advantage of the VC guaranteed
-sequentiality \cite[p161]{russell}
-
-The VC advantage of link and CPU efficiency due to using the LCI in
-place of the full address is not so marked when workarounds and
-real-life costs are taken into account: datagram network does not have
-to work with the full-length representation of an address, and replacing
-the (long) address with a (short) LCI does not necessarily prove to
-result in significant savings \cite[p161]{russell}
+%Some see it as an advantage that instead of using the (long) address, only the
+%(short) Logical Channel Identifier (LCI) is used.  This will save bandwidth,
+%complexity and processing power, compared to having to compute the route for
+%every datagram. \cite[p158]{russell} (the addresses are only used/needed during
+%the initial phase of connection set-up).  However, there are ways to approximate
+%these advantages even in datagram networks.
+%
+%Virtues of the VC technology do not prevent errors in other parts of
+%the application.  Properly engineered system will function correctly
+%regardless of which of the two approaches is used \cite[p161]{russell}
+%
+%Some applications can not take advantage of the VC guaranteed
+%sequentiality \cite[p161]{russell}
+%
+%The VC advantage of link and CPU efficiency due to using the LCI in
+%place of the full address is not so marked when workarounds and
+%real-life costs are taken into account: datagram network does not have
+%to work with the full-length representation of an address, and replacing
+%the (long) address with a (short) LCI does not necessarily prove to
+%result in significant savings \cite[p161]{russell}
 
 \section{Hybrid Approach}
 
@@ -301,35 +301,44 @@ the flexibility and cost-efficiency of a datagram network.
 
 The Hypertext Transfer Protocol is a public domain client-server
 stateless application layer protocol that communicates over TCP.
-\cite{rfc1945} \cite{rfc2616}
+\cite{rfc1945,rfc2616},
 \cite[pp122--124]{kurose}
 
 HTTP is the most often used data transport application protocol on the
 World Wide Web.
 
-\section{Design}
+\section{Function}
 
-HTTP uses reliable transport provided by TCP.  The protocol leverages
-the very powerful concept of URIs/URLs \cite{rfc1738}.  In version 1.1,
-several improvements were introduced that improve the performance of
-HTTP.  The specification was originally about 60 pages long, but it is
-now close to three times that, covering various issues. \cite{rfc2616}.
+HTTP retrieves and manipulates objects denoted by Uniform Resource Identifiers
+(URIs).  \cite{stallings} HTTP methods GET, PUT, DELETE, MOVE, LINK, UNLINK are
+used for this purpose.  HTTP has auxiliary capabilities represented by the
+methods HEAD OPTIONS, TRACE, CONNECT and others.
+
+HTTP has built-in support for caches.  Cache is an intermediate web server that
+takes the HTTP requests and if possible serves the objects from a local
+repository, thereby providing speedier response and saving Internet bandwidth.
 
 \section{Behaviour}
 
-% XXX
+HTTP uses several powerful technologies, some of them predating its invention,
+some of them invented because of HTTP.  Underlying character set is
+human-readable ASCII.  Reliable transport is provided by TCP.  The protocol
+leverages the very powerful concept of URIs/URLs \cite{rfc1738} to identify the
+objects that are to be manipulated.  HTTP also uses MIME, and other technologies
+to negotiate the presentation of the object identified by the URI.\cite{rfc2616}
+HTTP then retrieves the object.
 
-\section{Function}
+\section{Design}
 
-The main function of HTTP is to retrieve and manipulate objects denoted
-by Uniform Resource Locators (URLs).  URL is conceptually a subset of
-Uniform Resource Identifier---URI can denote things that are not
-retrievable, such as a book, telephone number, an e-mail address, or for
-example a program that can be queried via HTTP.  URL on the other hand
-denotes intrinsically retrievable objects. \cite{rfc1738}
+HTTP was designed to transfer simple textual web pages on the World Wide Web
+efficiently.  Because a typical web session has the user retrieving pages in a
+quick succession from different servers, the protocol was designed to have low
+overhead, and be stateless.  By the time HTTP 1.1 was designed, the Web changed
+radically, and a need for multi-object web pages was felt, as well as usefulness
+of tracking the user across visits.  Therefore, persistent connections and
+pipelining was added, and HTTP cookies.  Other functionality, such as the
+support for virtual servers (the Host header) has been added.
 
-HTTP has auxiliary capabilities represented by the methods HEAD, PUT,
-DELETE, OPTIONS, TRACE and CONNECT.
 
 \section{Packet Dissection}
 
@@ -351,11 +360,12 @@ the on-the-wire data in hexadecimal and ASCII representation.  We used
     \label{httprequest}
 \end{figure}
 
-Figure \ref{httprequest} shows the HTTP request.  TCP packet sent to HTTP
-default port (denoted by {\em http}; 80), the well-known port number assigned to HTTP.  The {\em Host}
-header is sent to allow for multiple virtual servers on the same IP
-address.  Keep-Alive is set despite the fact that the User Agent is
-going to download just this one page---in case of a redirect.
+Figure \ref{httprequest} shows the HTTP request. 
+TCP packet sent to HTTP default port (denoted by {\em http}; 80), the well-known port number assigned to HTTP.
+The request line specifies the GET method, path /, the HTTP version used is 1.0.
+The User Agent (UA) claims to be Wget version 1.10.2, and it accepts any and all MIME types.
+URI host part is example.com.  The UA wishes to use persistent connections.
+Entity body is empty.
 
 \begin{figure}[p]
     \centering
@@ -369,10 +379,16 @@ going to download just this one page---in case of a redirect.
     \label{httpresponse}
 \end{figure}
 
-Figure \ref{httpresponse} shows the HTTP response generated by the server at
-example.com in reaction to our request.  The number of headers is
-considerably larger.  Unlike our request, the response utilizes HTTP
-version 1.1.
+Figure \ref{httpresponse} shows the HTTP response.
+The status line shows the server uses HTTP version 1.1, status code 200 means
+that the request has been successfully processed.  The response was generated on
+2009-01-30 at 06:54:00 GMT.  Server claims to be Apache version 2.2.3 running on
+CentOS.  The requested object has not been modified since 2005-11-15 13:24:10
+GMT.  The entity tag (ETag) is given.  Server accepts byte-range requests.
+Length of the entity body is 438 octets.  Server will close the TCP connection
+when the entity body will have been transmitted.  The MIME type of the object is
+text/html, character set UTF-8.  The entity body contains the requested object
+(the HTML page).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ``There are TWO types of transport layer service that the Internet provides
@@ -386,14 +402,15 @@ version 1.1.
 	Layer Services}
 \thispagestyle{fancy}
 
-The two TCP/IP protocol suit transport layer protocols are UDP and TCP.
-We will show the strengths and weaknesses, and describe briefly how
-each of these two works.
+The two most prolific Internet Protocol Suite transport layer protocols are UDP
+and TCP.  We will show the characteristics of connection-oriented and
+connectionless services using UDP and TCP as examples and describing briefly how
+they work.
 
-\section{User Datagram Protocol}
+\section{Connectionless Service---User Datagram Protocol}
 
 UDP is defined in \cite{rfc768}.  It is the datagram transport in the
-TCP/IP (i.e.\ internet) protocol suite.  It is a very thin layer on top
+Internet Protocol Suite.  It is a very thin layer on top
 of IP, as it only provides a checksum and port number (enabling
 multiplexing, i.e.\ having more than one connection from one host to
 another via UDP). (Cf.\ Fig.\ \ref{udpheader}) \cite{rfc1180}
@@ -426,16 +443,16 @@ The connectionless service only provides the bare minimum necessary for
 a transport layer to provide.  This can be a positive feature, because
 it means low overhead and low implementation complexity.
 
-UDP provides the application layer with the ability to send and receive
-short fixed-length datagrams.  If this is not enough, the application
-must implement the missing features in a higher layer, or use another
-transport layer protocol, such as TCP.
+UDP provides the application layer with the ability to send and receive short
+fixed-length datagrams.   Each datagram is a separate transmission; there is no
+state kept in-between.  If desired, the application can implement some of the
+missing features in a higher layer.
 
-\section{Transport Control Protocol}
+\section{Connection-Oriented Service---Transport Control Protocol}
 
 TCP \cite{rfc793} is the most commonly used transport protocol in the
-TCP/IP suite.  In order to provide a connection-oriented service, the
-protocol is necessarily slightly more complex than its connectionless
+Internet Protocol Suite.  In order to provide a connection-oriented service, the
+protocol is necessarily more complex than its connectionless
 counterpart.  The complexity comes at cost in bandwidth and processing
 overhead.
 
@@ -446,32 +463,32 @@ using ports.  TCP provides the application layer with an abstraction of
 a transparent end-to-end duplex virtual circuit (byte stream).
 \cite{rfc1180}
 
-\subsection{How TCP Operates}
-
-Similarly to a link-layer Virtual Circuit, there are three phases of
-TCP operation:
-
-\begin{enumerate}
-    \item connection set-up
-    \item data transfer
-    \item connection tear-down
-\end{enumerate}
-
-Connection set-up is performed using a three-way handshake.  Once that
-is done, TCP accepts data from the application layer.  The connection
-comes to an end when either host terminates the connection, or the
-connection may time out.
-
-Every successfully received packet must be acknowledged.  Acknowledge
-packets can piggy-back on data packets sent to the other host.
-
-TCP uses a {\em sliding window} to determine whether a given packet has
-been received.  At any given time, as many bytes as can fit in the
-window can remain unacknowledged.  When the number of bytes goes over
-the size of the window, the packet is presumed lost.  The size of the
-window changes during the transmission, to accommodate changes in
-link throughput, and congestion control.
-
+%\subsection{How TCP Operates}
+%
+%Similarly to a link-layer Virtual Circuit, there are three phases of
+%TCP operation:
+%
+%\begin{enumerate}
+%    \item connection set-up
+%    \item data transfer
+%    \item connection tear-down
+%\end{enumerate}
+%
+%Connection set-up is performed using a three-way handshake.  Once that
+%is done, TCP accepts data from the application layer.  The connection
+%comes to an end when either host terminates the connection, or the
+%connection times out.
+%
+%Every successfully received packet is acknowledged.  Acknowledge
+%packets can piggy-back on data packets sent to the other host.
+%
+%TCP uses a {\em sliding window} to determine whether a given packet has
+%been received.  At any given time, as many bytes as can fit in the
+%window can remain unacknowledged.  When the number of bytes goes over
+%the size of the window, the packet is presumed lost.  The size of the
+%window changes during the transmission, to accommodate changes in
+%link throughput, and congestion control.
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
