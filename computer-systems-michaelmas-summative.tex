@@ -32,10 +32,14 @@
 
 \pagestyle{fancy}
 \fancyhead{}
-% \chead{Computer Systems --- Introduction to Networks --- Summative Assignment}
-\chead{Copyright © 2008–2009 Jan Minář {\tt <rdancer@rdancer.org>}}
+%\chead{Computer Systems --- Introduction to Networks --- Summative Assignment}
+%\chead{Copyright © 2008–2009 Jan Minář {\tt <rdancer@rdancer.org>}}
 	%\\ page \thepage\ of \pageref{LastPage}}
 
+\chead{
+    Computer Systems --- Introduction to Networks --- Summative Assignment\\
+    Copyright © 2008–2009 Jan Minář {\tt <rdancer@rdancer.org>}
+}
 
 \author{Jan Minář {\tt <rdancer@rdancer.org>}}
 %\date{November 24, 2008}
@@ -64,21 +68,20 @@
 
 In a client-server architecture, the application is distributed over two or
 more separate platforms.  The servers offer services which are utilized by the
-clients.  One functional unit can act in both of these roles at the same time
-(e.g.\ web server that is at the same time a client to a database server).
+clients.  One functional unit can act both as a client and a server at the same time
+(e.g.\ a web server that is at the same time a client to a database server).
 Clients and servers communicate over shared network. \cite[pp3--11]{vaughn}
 
 There is a vast number of applications that follow the client-server model
 (most of the ports assigned by IANA correspond to client-server applications
 \cite{iana}).  Alternatives to the client-server architecture include
-application architecture and peer-to-peer architecture.  \cite[p110]{kurose}
+{\em application} architecture and {\em peer-to-peer} architecture.  \cite[p110]{kurose}
 
-There is typically one or a few servers, serving large number of clients
+There is typically one or a few servers, serving a large number of clients
 \cite[p110]{kurose}.  It is not possible for clients to communicate
 with each other directly; all communication between clients must be
-realized through the server (for example, two Mail User Agents surely
-can send e-mails to each other, but all the e-mails will go through
-e.g.\ SMTP and IMAP servers).
+realized through the server (for example, two Mail User Agents 
+can indeed send e-mails to each other, but always via e.g.\ SMTP and IMAP mail servers).
 
 Maintaining a server can be ``infrastructure-intensive'', when the server has
 to withstand very many requests.  Often a server farm is deployed, so that the
@@ -93,18 +96,22 @@ must have had requested the operating system to listen on a given (TCP
 or UDP) port.  The port numbers and their corresponding services are
 maintained by a central registry \cite{iana}, so that for example a POP3
 client will be able to connect to a POP3 server just by knowing the
-server IP address.  The port number will not have to be specified.
-Once the client sends in a request to the correct port and address,
-request is received by the operating system of the server machine, the
-operating system passes the request on to the server process.  The
-server process responds to the request, and two-way communication
-ensues.
+server IP address.  The port number only has to be specified when it differs
+from the default.  Once the client sends in a request to the correct port and
+address, request is received by the operating system of the server machine, the
+operating system passes the request on to the server process.  The server
+process responds to the request, and two-way communication ensues.
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 \section{Thick and Thin Clients}
 
-A thin client system does most of the data processing on the server side.  This allows the client to be relatively low-powered, which can mean lower costs (network terminals used instead of full-blown PCs, with the applications running on the application server), or perhaps longer battery life (mobile phone or a PDA running a video-processing application client, with the actual computationally intensive video re-encoding is done on the server accessed over the mobile network).  Early web browsers were thin clients.
+A thin client system does most of the data processing on the server side.  This
+allows the client to be relatively low-powered, which can mean lower costs
+(network terminals used instead of full-blown PCs, with the applications running
+on an application server), or perhaps longer battery life (mobile phone or a PDA
+running a video-processing application client, with the actual computationally
+intensive video re-encoding performed on the server accessed over the mobile network).  Early web browsers were thin clients.
 
 A thick client does most of the data processing itself.  This approach
 does not suffer from the limitations of the network, such as latency.
@@ -121,8 +128,7 @@ Contemporary web browsers are thick clients.
 % datagram.  Describe in detail the key features of each type?''
 %	-- the assignment
 
-%\chapter{Key Features of Virtual Circuit and Datagram Packet Switching Networks}
-\chapter{Virtual Circuit v Datagram}
+\chapter{Key Features of Virtual Circuit and Datagram Packet Switching Networks}
 \thispagestyle{fancy}
 
 % Intro
@@ -131,33 +137,38 @@ Contemporary web browsers are thick clients.
 % Just plain blabbering from now on
 
 VC came from the traditional pre-existing voice telephone network, which
-was a usually state-wide network, with interstate and overseas links.
-The word ``datagram'' derives from ``telegram'' \cite[p141]{russell}.  On the other hand, packet switching was a cool new technology in the 1970s.  Nowadays, datagram takes over traditional mainstays of VC, however, VC is still being used.  It is possible to use a mixed approach.
+was usually a state-wide network, with interstate and overseas links.
+The word ``datagram'' itself derives from ``telegram'' \cite[p141]{russell}.  On
+the other hand, packet switching was developed in the 1970s as means of
+efficient transmission of data over long distances.  Nowadays, datagram takes over traditional mainstays of VC, however, VC is still being used.  It is possible to use a mixed approach.
 
-Three phases of setting up the connection on a VC:
+There are three phases of setting up the connection on a VC:
 
 \begin{enumerate}
 \item set-up
     \begin{itemize}
-    \item The LCI (Logical Channel Identifier; the name of the single
-    connection to the next node) is chosen
-    \item resources are reserved, and everything is set---this can take
-    some amount of time, leading to an up-front delay
+    %\item LCI (Logical Channel Identifier; the name of the single connection to the next node) is chosen
+    \item the path through the network is determined
+    \item resources such as bandwidth/time slot are reserved, and everything is set
+    \item this can take some amount of time, creating a set-up delay
     \end{itemize}
 \item data transfer
     \begin{itemize}
-    \item nodes use LCI
-    \item the latency is considerably negligible, because there are no delays introduced by the management of the link, unlike with datagram networks
+    %\item nodes use LCI
+    \item the path does not changed for the duration of the connection
+    \item resources remain reserved even when not actually needed
+    \item the latency is negligible, because there are no delays introduced by the management of the link, unlike with datagram networks
     \end{itemize}
 \item tear-down
     \begin{itemize}
         %\item the resources are freed
-	\item LCI is forgotten
+	%\item LCI is forgotten
 	\item the routing table entries are purged
 	\item bandwidth/slots are released for use for future VCs
     \end{itemize}
 \end{enumerate}
 
+Datagram networks route each packet individually.
 
 \section{History}
 
@@ -166,10 +177,10 @@ In telephony systems, complexity is kept within the network, which allows
 the other hand designed to connect sophisticated hosts, and designed
 deliberately to be ``as simple as possible''.  Complex functionality is
 implemented by the {\em transport} and {\em application} layers.  The internet
-network layer is easy to implement over disparate range of {\em link} layer
+{\em network} layer is easy to implement over disparate range of {\em link} layer
 technologies, such as ``satellite, Ethernet, fiber, or radio''.  It's also easy
-to implement new applications, because all that is required is implemented in
-the end hosts; changes to the network are not necessary.
+to implement new applications, because all that is required is to implement them
+in the end hosts; changes to the network are not necessary.
 \cite[pp349--351]{kurose}
 
 \section{Comparison}
@@ -206,8 +217,8 @@ for
 	of few technologies of choice for data transmission over long distances
 	\cite[p298--299]{stallings} \\ \hline
 
-good for voice \& similar real-time, nonfluctuating bandwidth requirements, low
-latency applications
+good for voice \& similar real-time, low-latency applications that require
+	approximately the same amount of bandwidth over time
 	& good for applications that transmit data in bursts \\ \hline
 
 upfront delay while the virtual circuit is set up; latency negligible afterwards
@@ -220,9 +231,8 @@ upfront delay while the virtual circuit is set up; latency negligible afterwards
 \end{table} 
 
 
-Table \ref{vcdgcomparison} compiled from \cite{kurose} \cite[p298--299]{stallings} \cite{russell}.
-
-%.% Needed to make the skip
+Table \ref{vcdgcomparison} compiled from data in \cite{kurose},
+\cite[p298--299]{stallings} and \cite{russell}.
 
 Some see it as an advantage that instead of using the (long) address,
 only the (short) LCI is used.  This will save bandwidth, complexity and
