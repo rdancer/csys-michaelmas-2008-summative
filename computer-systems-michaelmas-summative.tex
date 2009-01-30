@@ -133,16 +133,17 @@ Contemporary web browsers are thick clients.
 
 % Intro
 
+{\em Virtual circuit} (VC; also called {\em virtual call}) networks came from the
+traditional pre-existing voice telephone network, which was usually a state-wide
+network, with interstate and overseas links.  The word ``datagram'' itself
+derives from ``telegram'' \cite[p141]{russell}.  On the other hand, {\em packet
+switching} was developed in the 1970s as means of efficient transmission of data
+over long distances.  Nowadays, datagram networking takes over traditional mainstays of VC,
+however, VC is still being used.  It is possible to use a mixed approach.
 
-% Just plain blabbering from now on
+\section{Virtual Circuit Lifetime}
 
-VC came from the traditional pre-existing voice telephone network, which
-was usually a state-wide network, with interstate and overseas links.
-The word ``datagram'' itself derives from ``telegram'' \cite[p141]{russell}.  On
-the other hand, packet switching was developed in the 1970s as means of
-efficient transmission of data over long distances.  Nowadays, datagram takes over traditional mainstays of VC, however, VC is still being used.  It is possible to use a mixed approach.
-
-There are three phases of setting up the connection on a VC:
+Connection via VC has three phases:
 
 \begin{enumerate}
 \item set-up
@@ -168,95 +169,9 @@ There are three phases of setting up the connection on a VC:
     \end{itemize}
 \end{enumerate}
 
-Datagram networks route each packet individually.
-
-\section{History}
-
-In telephony systems, complexity is kept within the network, which allows
-``dumb'' end-systems as simple as rotary phones be connected.  Internet was on
-the other hand designed to connect sophisticated hosts, and designed
-deliberately to be ``as simple as possible''.  Complex functionality is
-implemented by the {\em transport} and {\em application} layers.  The internet
-{\em network} layer is easy to implement over disparate range of {\em link} layer
-technologies, such as ``satellite, Ethernet, fiber, or radio''.  It's also easy
-to implement new applications, because all that is required is to implement them
-in the end hosts; changes to the network are not necessary.
-\cite[pp349--351]{kurose}
-
-\section{Comparison}
-
-\begin{table}[h]
-  \begin{tabular}{ | p{6cm} | p{6cm} | }
-  \hline
-
-  {\em Virtual Circuit}
-  	& {\em Datagram} \\ \hline
-  \hline
-
-E.g.\ in telephony systems, complexity is kept within the network, which allows ``dumb'' end-systems as simple as rotary phones be connected \cite[p349]{kurose}
-	& Internet was on the other hand designed to connect sophisticated
-	hosts, and designed deliberately to be ``as simple as possible''.  Complex functionality is implemented by the {\em transport} and {\em application} layers. \cite[pp349--351]{kurose}
-	\\ \hline
-
-maintains a dedicated path through the network between the two end-hosts 
-	& routes each packet separately, each packet contains routing
-	information header; path can change in-between packets \\ \hline
-
-guarantees delivery, low latency, bandwidth
-	& best-effort, with packet loss/duplicity, jitter, data corruption,
-	shared bandwidth \\ \hline
-
-its all-or-nothing approach means it will simply fail hard, and tear down the
-connection
-	&  that when datagram network routes around a malfunctioning router,
-	and recovers from errors \\ \hline
-
-naturally maps onto traditional voice networks, which it was developed from and
-for
-	& in the 1970s newly devised; has not fundamentally changed since, one
-	of few technologies of choice for data transmission over long distances
-	\cite[p298--299]{stallings} \\ \hline
-
-good for voice \& similar real-time, low-latency applications that require
-	approximately the same amount of bandwidth over time
-	& good for applications that transmit data in bursts \\ \hline
-
-upfront delay while the virtual circuit is set up; latency negligible afterwards
-	& considerable latency due to intrinsic delays \\ \hline
-
-  \end{tabular}
-  \caption{Comparison of Virtual Circuit and Datagram Networks}
-  \label{vcdgcomparison}
-
-\end{table} 
-
-
-Table \ref{vcdgcomparison} compiled from data in \cite{kurose},
-\cite[p298--299]{stallings} and \cite{russell}.
-
-Some see it as an advantage that instead of using the (long) address,
-only the (short) LCI is used.  This will save bandwidth, complexity and
-processing power, compared to having to compute the route for every
-datagram. \cite[p158]{russell} (the addresses are only used/needed
-during the initial phase of connection set-up).  However, there are ways
-to approximate these advantages even in datagram networks.
-
-The virtues of the VC technology do not prevent errors in other parts of
-an application.  Properly engineered system will function correctly
-regardless of which of the two approaches is used \cite[p161]{russell}
-
-Some applications can not take advantage of the VC guaranteed
-sequentiality \cite[p161]{russell}
-
-The VC advantage of link and CPU efficiency due to using the LCI in
-place of the full address is not so marked when workarounds and
-real-life costs are taken into account: datagram network does not have
-to work with the full-length representation of an address, and replacing
-the (long) address with a (short) LCI does not necessarily prove to
-result in significant savings \cite[p161]{russell}
-
 \section{Routing in Datagram Networks}
 
+Datagram networks route each packet individually.
 When a datagram router receives a packet, it needs to decide which next
 hop it should send it to, i.e.\ which interface to forward it via.  It
 would be impractical to store this information for every possible
@@ -276,11 +191,96 @@ devised that change routing table typically every few minutes.  In
 contrast to that, in a VC network, the routing table constantly changes
 with every VC setup/tear-down, many times a second.
 
+
+%\section{History}
+%
+%In telephony systems, complexity is kept within the network, which allows
+%``dumb'' end-systems as simple as rotary phones be connected.  Internet was on
+%the other hand designed to connect sophisticated hosts, and designed
+%deliberately to be ``as simple as possible''.  Complex functionality is
+%implemented by the {\em transport} and {\em application} layers.  The internet
+%{\em network} layer is easy to implement over disparate range of {\em link} layer
+%technologies, such as ``satellite, Ethernet, fiber, or radio''.  It's also easy
+%to implement new applications, because all that is required is to implement them
+%in the end hosts; changes to the network are not necessary.
+%\cite[pp349--351]{kurose}
+
+\section{Comparison}
+
+\begin{table}[h]
+  \begin{tabular}{ | p{6cm} | p{6cm} | }
+  \hline
+
+  {\em Virtual Circuit}
+  	& {\em Datagram} \\ \hline
+  \hline
+
+complexity is kept within the network, which allows end-systems to be simple,
+even ``dumb'' \cite[p349]{kurose}
+	& designed to connect sophisticated
+	hosts, the network is deliberately ``as simple as possible'';  complex functionality is implemented by the {\em transport} and {\em application} layers \cite[pp349--351]{kurose}
+	\\ \hline
+
+maintains a dedicated path through the network between the two end-hosts 
+	& routes each packet separately, each packet contains routing
+	information header; path can change in-between packets \\ \hline
+
+guarantees delivery, low latency and reserved bandwidth
+	& best-effort, with packet loss/duplicity, jitter, data corruption,
+	shared bandwidth \\ \hline
+
+its all-or-nothing approach means it will simply fail hard and tear down the
+connection in case of an error
+	&  routes around a malfunctioning router or network path and recovers
+	from errors \\ \hline
+
+naturally maps onto traditional voice networks, which it was developed from and
+for
+	& developed in the 1970s; has not fundamentally changed since, one
+	of few technologies of choice for data transmission over long distances
+	\cite[p298--299]{stallings} \\ \hline
+
+good for voice, video \& similar real-time, low-latency applications that
+require approximately the same amount of bandwidth all the time
+	& good for applications that transmit data in bursts \\ \hline
+
+upfront delay while the virtual circuit is set up; latency negligible afterwards
+	& considerable latency due to intrinsic delays \\ \hline
+
+  \end{tabular}
+  \caption{Comparison of Virtual Circuit and Datagram Networks}
+  \label{vcdgcomparison}
+\end{table} 
+
+
+Table \ref{vcdgcomparison} compiled from data in \cite{kurose},
+\cite[p298--299]{stallings} and \cite{russell}.
+
+Some see it as an advantage that instead of using the (long) address, only the
+(short) Logical Channel Identifier (LCI) is used.  This will save bandwidth,
+complexity and processing power, compared to having to compute the route for
+every datagram. \cite[p158]{russell} (the addresses are only used/needed during
+the initial phase of connection set-up).  However, there are ways to approximate
+these advantages even in datagram networks.
+
+Virtues of the VC technology do not prevent errors in other parts of
+the application.  Properly engineered system will function correctly
+regardless of which of the two approaches is used \cite[p161]{russell}
+
+Some applications can not take advantage of the VC guaranteed
+sequentiality \cite[p161]{russell}
+
+The VC advantage of link and CPU efficiency due to using the LCI in
+place of the full address is not so marked when workarounds and
+real-life costs are taken into account: datagram network does not have
+to work with the full-length representation of an address, and replacing
+the (long) address with a (short) LCI does not necessarily prove to
+result in significant savings \cite[p161]{russell}
+
 \section{Hybrid Approach}
 
-``VC can be built on top of the datagram service'' \cite[p141]{russell}
-
-Many currently deployed networks behave like a VC towards the end-hosts,
+``[V]irtual circuit can be built on top of the datagram service''
+\cite[p141]{russell}.  Many currently deployed networks behave like a VC towards the end-hosts,
 and are really internally working as datagram networks---the advantage
 of having a comfortable interface presented to the host is married with
 the flexibility and cost-efficiency of a datagram network.
@@ -299,9 +299,9 @@ the flexibility and cost-efficiency of a datagram network.
 \thispagestyle{fancy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Hypertext Transfer Protocol is a non-proprietary client-server
+The Hypertext Transfer Protocol is a public domain client-server
 stateless application layer protocol that communicates over TCP.
-\cite{rfc1945} \cite{rfc2616}.
+\cite{rfc1945} \cite{rfc2616}
 \cite[pp122--124]{kurose}
 
 HTTP is the most often used data transport application protocol on the
@@ -340,7 +340,6 @@ the on-the-wire data in hexadecimal and ASCII representation.  We used
 {\em Wireshark} 1.0.0 to perform the packet analysis.
 
 \begin{figure}[p]
-    \label{httprequest}
     \centering
     % Border around the image
     \setlength\fboxsep{0pt}
@@ -349,22 +348,16 @@ the on-the-wire data in hexadecimal and ASCII representation.  We used
 	\includegraphics[width=0.8\textwidth]{http-get.png}
     }
     \caption{HTTP request}
+    \label{httprequest}
 \end{figure}
 
-Figure
-%
-% XXX
-%\refttprequest}
-3.1
-%
-shows the HTTP request.  TCP packet sent to port {\em
-http} (80), the well-known port number assigned to HTTP.  The {\em Host}
+Figure \ref{httprequest} shows the HTTP request.  TCP packet sent to HTTP
+default port (denoted by {\em http}; 80), the well-known port number assigned to HTTP.  The {\em Host}
 header is sent to allow for multiple virtual servers on the same IP
 address.  Keep-Alive is set despite the fact that the User Agent is
 going to download just this one page---in case of a redirect.
 
 \begin{figure}[p]
-    \label{httpresponse}
     \centering
     % Border around the image
     \setlength\fboxsep{0pt}
@@ -373,15 +366,10 @@ going to download just this one page---in case of a redirect.
 	\includegraphics[width=0.8\textwidth]{http-200-ok.png}
     }
     \caption{HTTP response}
+    \label{httpresponse}
 \end{figure}
 
-Figure
-%
-% XXX
-%\ref{httpresponse}
-3.2
-%
-shows the HTTP response generated by the server at
+Figure \ref{httpresponse} shows the HTTP response generated by the server at
 example.com in reaction to our request.  The number of headers is
 considerably larger.  Unlike our request, the response utilizes HTTP
 version 1.1.
