@@ -53,12 +53,60 @@
 
 \chapter{Client-Server Architecture}
 
+In a client-server architecture, the application is distributed over two or
+more separate platforms.  The servers offer services which are utilized by the
+clients.  One functional unit can act in both of these roles at the same time
+(e.g.\ web server that is at the same time a client to a database server).
+Clients and servers communnicate over shared network. \cite[pp3--11]{vaughn}
+
+There is a vast number of applications that follow the client-server model
+(most of the ports assigned by IANA correspond to client-server applications
+\cite{iana}).  Alternatives to the client-server architecture include
+application architecture and peer-to-peer architecture.  \cite[p110]{kurose}
+
+There is typically one or a few servers, serving large number of clients \cite[p110]{kurose}.  It is not possible for clients to communnicate with each other directly; all communnication between clients must be realized through the server (for example, two Mail User Agents surely can send e-mails to each other, but all the e-mails will go through e.g.\ SMTP servers and IMAP servers).
+
+Maintaining a server can be ``infrastracture-intensive'', when the server has
+to withstand very many requests.  Often a server farm is deployed, so that the
+requests are shared between multiple machines.  \cite[p110]{kurose}
+
+\section{Transport Layer View}
+
+The client initiates the communnication by sending a request to the server.
+The server Servers only respond, and can never initiate communnication.
+Looking at the transport layer: a process will request the operating system to
+listen on a given (TCP or UDP) port.  It will {\em bind} to a port.  The port
+numbers and their corresponding services are maintained by a central registry
+\cite{iana}, so that for example a POP3 client will be able to connect to a
+POP3 server just by knowing the server IP address.  The port number will not
+have to be specified.  The situation is complicated by setups such as Network
+Address Translation (NAT), when one IP address is used by more than one server
+of a kind, and thus all but one of the servers must use non-standard port
+numbers. %  Some services use DNS SPI records to circumvent this limitation.
+Once the client sends in a request to that port at that address, and the
+request is received by the operating system of the server machine, the
+operating system passes the request on to the server process.  The server
+process responds to the request, and two-way communnication ensues.  
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{Thick and Thin Clients}
+
+Thin client is when most of the data processing is done on the server.  This allows the the client to be relatively low-powered, which can mean lower costs (network terminals used instead of full-blown PCs, with the applications running on the application server), or perhaps longer battery life (mobile phone or a PDA running a video-processing application client, with the actual computationally intensive video re-encoding is done on the server accessed over the mobile network).  Early web browsers were thin clients.
+
+Thick client is when the client does most of the data processing.  This approach does not suffer from the limitations of the network such as latency.  For example, high quality video playback is a bandwidth-intensive application, and it is often more practical to transport the video over the network in a compressed form, and have the client do the computationally intensive decompression.  Contemporary web browsers are thick clients.
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 Sources used:
-\cite{slides-lecture-4}
+    \cite{slides-lecture-4}
+    \cite{kurose}
+    \cite{vaughn}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\begin{quote}
-:%``In computing, phishing is a form of social engineering, characterised by
+%``In computing, phishing is a form of social engineering, characterised by
 %attempts to fraudulently acquire sensitive information, such as passwords
 %[\,\ldots]'' \cite{gwavanation:phishing-definition}
 %\end{quote}
@@ -74,11 +122,11 @@ Sources used:
 
 % Intro
 
-The word ``datagram'' derives from ``telegram'' \cite[p 141]{russell}
+The word ``datagram'' derives from ``telegram'' \cite[p141]{russell}
 
 % Just plain blabbering from now on
 
-``VC can be built on top of the datagram service'' \cite[p 141]{russell}
+``VC can be built on top of the datagram service'' \cite[p141]{russell}
 
 VC came from the traditional pre-existing voice telephone network, which was a usually state-wide network, with interstate and overseas links.  On the other hand, packet switching was a cool new technology in the 1970s.  Nowadays, datagram takes over traditional mainstays of VC, however, VC is still being used.  It is possible to use a mixed approach.
 
@@ -92,7 +140,7 @@ Three phases of setting up the connection on a VC:
 \item[1.] set-up
     \begin{itemize}
     \item Here all the resources are reserved, and everything is set
-    \item The way it works, the LCI (Logical Channel Identifier) is the name of the single connection to the next node---some see it as an advantage that instead of using the (long) address, only the (short) LCI is used.  This will save bandwidth and complexity and CPU cycles compared to having to compute the route for every datagram. \cite[p 158]{russell} (the addresses are only used/needed during the initial phase of connection set-up).  However, there are ways to work around this limitation in datagram networks.
+    \item The way it works, the LCI (Logical Channel Identifier) is the name of the single connection to the next node---some see it as an advantage that instead of using the (long) address, only the (short) LCI is used.  This will save bandwidth and complexity and CPU cycles compared to having to compute the route for every datagram. \cite[p158]{russell} (the addresses are only used/needed during the initial phase of connection set-up).  However, there are ways to work around this limitation in datagram networks.
     \item Takes time, so the up-front delay can be considerably higher than datagram
     \end{itemize}
 \item[2.] data transfer
