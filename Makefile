@@ -57,7 +57,6 @@ $(DVI_FILE): $(TEX_FILE) $(BIBTEX_DATA)
 	$(BIBTEX)	$(BASE)		||:
 	$(LATEX)	$(TEX_FILE)	||:
 	$(LATEX)	$(TEX_FILE)	||:
-	$(LATEX)	$(TEX_FILE)	||:
 
 # Make the PostScript file
 .PHONY: ps
