@@ -59,6 +59,12 @@ FILES
 	Mails from the time-stamping service (UNIX mailbox format).  Can be
 	used to prove that the revision history has not been faked.
 
+    contrib/rfc.bib
+	RFC index in a BibTeX format
+
+    contrib/README.rfc.bib
+	Information pertaining to the RFC BibTeX file
+
     Other files are used/included by the files named above.  See the respective
     source file comments for information on them.
 
