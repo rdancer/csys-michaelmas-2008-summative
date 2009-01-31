@@ -1,0 +1,87 @@
+From mailer@stamper.itconsult.co.uk Sat Jan 31 08:40:05 2009
+Delivered-To: rdancer@gmail.com
+Received: by 10.181.155.2 with SMTP id h2cs74598bko; Sat, 31 Jan 2009
+	08:40:05 -0800 (PST)
+Received: by 10.210.27.20 with SMTP id a20mr2744435eba.81.1233420004006;
+	Sat, 31 Jan 2009 08:40:04 -0800 (PST)
+X-Forwarded-To: rdancer@gmail.com
+X-Forwarded-For: rdancer@rdancer.org rdancer@gmail.com
+Delivered-To: rdancer@rdancer.org
+Received: by 10.210.142.5 with SMTP id p5cs57189ebd; Sat, 31 Jan 2009
+	08:40:03 -0800 (PST)
+Received: by 10.210.43.11 with SMTP id q11mr243392ebq.61.1233420003556;
+	Sat, 31 Jan 2009 08:40:03 -0800 (PST)
+Return-Path: <mailer@stamper.itconsult.co.uk>
+Received: from m14.itconsult.net (m14.itconsult.net [193.201.42.13]) by
+	mx.google.com with ESMTP id z34si1927392ikz.22.2009.01.31.08.40.02; Sat, 31
+	Jan 2009 08:40:03 -0800 (PST)
+Received-SPF: neutral (google.com: 193.201.42.13 is neither permitted nor
+	denied by best guess record for domain of mailer@stamper.itconsult.co.uk)
+	client-ip=193.201.42.13;
+Authentication-Results: mx.google.com; spf=neutral (google.com:
+	193.201.42.13 is neither permitted nor denied by best guess record for
+	domain of mailer@stamper.itconsult.co.uk)
+	smtp.mail=mailer@stamper.itconsult.co.uk
+Received: from stamper.itconsult.co.uk (stamper.itconsult.co.uk
+	[193.201.42.31]) by m14.stamper.itconsult.co.uk (GMS
+	15.02.3689/NT8923.00.54dca388) with SMTP id hkizcraa for
+	rdancer@rdancer.org; Sat, 31 Jan 2009 16:40:01 +0000
+From: Stamper <mailer@stamper.itconsult.co.uk>
+To: rdancer@rdancer.org
+Subject: Clear Stamped 0545856:CSys Networking assignment as submitted for
+	grading
+Message-Id: <0545856.a@stamper.itconsult.co.uk>
+Date: Sat, 31 Jan 2009 16:40:01 +0000
+X-DNSBL: 0
+X-Evolution-Source: imap://rdancer%40gmail.com@imap.gmail.com/
+Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0
+Status: RO
+
+Stamper is a service provided free of charge to Internet users.
+
+You are very welcome to use Stamper, but you may only do so if 
+you have first read our Terms of use, which exclude liability on 
+our part and which provide for you to indemnify us against any 
+potential liability arising from your use of Stamper.  By using 
+Stamper you warrant that you have read and accept the Terms.
+
+The Terms of use are available by sending email to 
+info@stamper.itconsult.co.uk or from the web page 
+http://www.itconsult.co.uk/stamper.htm.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+
+########################################################
+#
+# The text of this message was stamped by
+# stamper.itconsult.co.uk with reference 0545856
+# at 16:40 (GMT) on Saturday 31 January 2009
+#
+# For information about the Stamper service see
+#        http://www.itconsult.co.uk/stamper.htm
+#
+########################################################
+
+commit e6ee679acaea5c663962e61918a37b3fd67e7f5e
+Author: Jan Min=C3=A1=C5=99 <rdancer@rdancer.org>
+Date:   Fri Jan 30 18:13:29 2009 +0000
+
+    This is the state of the art as submitted for grading, three
+minutes before the deadline.
+    Adding the resulting PDF (the exact file submitted) for reference.
+
+-----BEGIN PGP SIGNATURE-----
+Version: 2.6.3i
+Charset: noconv
+Comment: Stamper Reference Id: 0545856
+
+iQEVAgUBSYR+4IGVnbVwth+BAQFTKQf8DzNRXBBAYLs0cjKdKozn9aDTYb4VWjbb
+WhQAMH1wSR4d6srhKcrD/6VbV9vfzD7rfphuKmCxDuFprKfVfvSqz7dSItthAcgO
+Po12HFg64MC3wCLCfOsLs127++jbcddL7oN+x2fOM98F8hvQPbhF3GVtIr5OWSuB
+rfre+xyQl9+qPc4TtofkBPJQuywhezis3CbrU3nPgzxp4VOzhoFVAT8ZQAZMOR5m
+aRrUCaFBykLAMHrq1i+iYgWnbGtm5YIbgB0GfZrOz6ENrwOlZ78Uk2GDvzmXwt2z
+Pv1vatwvgDzKaxlWPzzshSbcz8+B00ctboLgoBu0IXQ8jcBXYT/vDg==
+=Vgf5
+-----END PGP SIGNATURE-----
+

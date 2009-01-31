@@ -55,6 +55,10 @@ FILES
     *.bib
 	BibTeX citation source files
 
+    stamper.mbox
+	Mails from the time-stamping service (UNIX mailbox format).  Can be
+	used to prove that the revision history has not been faked.
+
     Other files are used/included by the files named above.  See the respective
     source file comments for information on them.
 
