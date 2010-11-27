@@ -1,6 +1,6 @@
 # Makefile -- Main make file for this project
 #
-#   Copyright © 2008–2009 Jan Minář <rdancer@rdancer.org>
+#   Copyright © 2008–2010 Jan Minář <rdancer@rdancer.org>
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License version 2 (two),
@@ -17,27 +17,19 @@
 
 LATEX = latex
 BIBTEX = bibtex
-BASE = computer-systems-michaelmas-summative
+BASE = introduction-to-programming-michaelmas-2010-summative
 TEX_FILE = $(BASE).tex
-DVI_FILE = $(BASE).dvi
-POSTSCRIPT_FILE = $(BASE).ps
 PDF_FILE = $(BASE).pdf
 BIBTEX_DATA = references.bib
 
 # Programs
 # Is there a way to get this from MIME association database?
 # -- yes: gvfs-open(1x)
-#VIEWER = /usr/lib/kde4/bin/okular  # Is not in $PATH
-	# Too slow
-VIEWER = xdvi -geometry -0-0 # Bottom right corner
+VIEWER = evince
 
 # untex(1) is not really precise.  The word count is give or take few words.
 WORD_COUNT = $(shell untex -eo - < $(TEX_FILE) | wc -w)
 WORD_COUNT_TARGET = 1800 # 450 words per question * 4 questions
-
-PNG_RESOLUTION = 300  # dpi
-DVIPNG = dvipng -D$(PNG_RESOLUTION)
-
 
 # Just make all by default, and display the result
 .PHONY: default
@@ -45,61 +37,35 @@ default: all
 
 # Make everything
 .PHONY: all
-all: $(DVI_FILE) $(POSTSCRIPT_FILE) $(PDF_FILE) wordcount
-
-# Make the DVI file
-.PHONY: dvi
-dvi: $(DVI_FILE)
-$(DVI_FILE): $(TEX_FILE) $(BIBTEX_DATA)
-	$(LATEX)	$(TEX_FILE)	||:
-	$(BIBTEX)	$(BASE)		||:
-	$(LATEX)	$(TEX_FILE)	||:
-	$(BIBTEX)	$(BASE)		||:
-	$(LATEX)	$(TEX_FILE)	||:
-	$(LATEX)	$(TEX_FILE)	||:
-
-# Make the PostScript file
-.PHONY: ps
-ps: $(POSTSCRIPT_FILE)
-$(POSTSCRIPT_FILE): $(DVI_FILE)
-	dvips $(DVI_FILE)
+all: $(PDF_FILE) wordcount
 
 # Make the PDF file
-.PHONY: pdf
+.PHONY: dvi
 pdf: $(PDF_FILE)
-$(PDF_FILE): $(DVI_FILE)
-	dvipdf $(DVI_FILE)
+$(PDF_FILE): $(TEX_FILE) $(BIBTEX_DATA)
+	$(LATEX)	$(TEX_FILE)	||:
+	$(BIBTEX)	$(BASE)		||:
+	$(LATEX)	$(TEX_FILE)	||:
+	$(BIBTEX)	$(BASE)		||:
+	$(LATEX)	$(TEX_FILE)	||:
+	$(LATEX)	$(TEX_FILE)	||:
 
-# Distill one PNG for every page — to be pasted into a Microsoft Word document
-.PHONY: pngs
-pngs: $(DVI_FILE)
-	#rm -rf -- $(PNG_DIRECTORY)
-	#mkdir -- $(PNG_DIRECTORY)
-	$(DVIPNG) $(BASE).dvi
-
-# Remove all that can be re-made
+# Remove all that can be re-made (sans the useful files -- cf. make mrproper)
 .PHONY: clean
 clean:
-	rm -f -- $(DVI_FILE)
-	rm -f -- $(POSTSCRIPT_FILE)
-	rm -f -- $(PDF_FILE)
 	rm -f -- $(BASE).aux
 	rm -f -- $(BASE).log
 	rm -f -- $(BASE).bbl
 	rm -f -- $(BASE).blg
-	# dvipng(1) names the files according to the source file basename:
-	# FOO.dvi -> FOO<page_number>.png
-	rm -f -- $(BASE)?*.png
 
-# Display the resulting document
+# Remove even the useful files
+.PHONY: mrproper
+mrproper: clean
+	rm -f -- $(PDF_FILE)
+
 .PHONY: view
 view: all
-	$(VIEWER) $(DVI_FILE)
-
-# Display the resulting document, in the background
-.PHONY: view
-viewbg: all
-	($(VIEWER) $(DVI_FILE) >/dev/null 2>&1 &)
+	$(VIEWER) $(PDF_FILE)
 
 # Print on the printer
 .PHONY: hardcopy
