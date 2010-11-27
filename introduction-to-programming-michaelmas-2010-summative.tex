@@ -87,12 +87,50 @@ This work is in part based on \cite{minar}
 \chapter{Method}
 \thispagestyle{fancy}
 
+We are going to be using OpenJDK, Java version 1.6.
+\begin{verbatim}
+$ java -version
+java version "1.6.0_18"
+OpenJDK Runtime Environment (IcedTea6 1.8.2) (6b18-1.8.2-4ubuntu2)
+OpenJDK 64-Bit Server VM (build 16.0-b13, mixed mode)
+\end{verbatim}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ``Results (20%) Present your results numerically, using tables, graphs,
 % charts, summary statistics (e.g. averages) as appropriate.''
 %	-- the assignment
 \chapter{Results}
 \thispagestyle{fancy}
+
+\begin{figure}[p]
+    \centering
+    % Border around the image
+    \setlength\fboxsep{0pt}
+    \setlength\fboxrule{0.5pt}
+    \fbox{
+	\includegraphics[width=0.8\textwidth]{placeholder-pie-chart.png}
+    }
+    \caption{Fault Injection Effect}
+    \label{placeholder}
+\end{figure}
+
+Figure \ref{placeholder} shows XXX XXX.
+
+\begin{figure}[p]
+    \centering
+    % Border around the image
+    \setlength\fboxsep{0pt}
+    \setlength\fboxrule{0.5pt}
+    \fbox{
+	\includegraphics[width=0.8\textwidth]{placeholder-pie-chart-error-identification.png}
+    }
+    \caption{Error Identification}
+    \label{placeholder-error-identification}
+\end{figure}
+
+Figure \ref{placeholder-error-identification} shows XXX XXX.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ``Discussion (20%) What do your results have to say about the hypotheses?''
@@ -529,6 +567,39 @@ This work is in part based on \cite{minar}
 %%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%
+% Appendices
+%
+
+\appendix
+\chapter{Result data}
+
+\begin{table}[h]
+  \begin{tabular}{ | p{3cm} | p{1cm} | p{8cm} | }
+  \hline
+
+  {\em File Name}
+  	& {\em Line} 
+	& {\em Result}
+	\\ \hline
+  \hline
+
+  foo.java
+      & 3
+      & Comment removed --- no effect on semantics
+      \\ \hline
+  bar.java
+      & 42
+      & Compile time error: ``bar.java:3: You fool!''
+      \\ \hline
+
+  \end{tabular}
+  \caption{Line removal}
+  \label{remove-line-data}
+\end{table} 
+
+
+Table \ref{remove-line-data} presents the… data!
 
 %
 % References

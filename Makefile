@@ -42,7 +42,7 @@ all: $(PDF_FILE) wordcount
 # Make the PDF file
 .PHONY: dvi
 pdf: $(PDF_FILE)
-$(PDF_FILE): $(TEX_FILE) $(BIBTEX_DATA)
+$(PDF_FILE): $(TEX_FILE) $(BIBTEX_DATA) ./*.png
 	$(LATEX)	$(TEX_FILE)	||:
 	$(BIBTEX)	$(BASE)		||:
 	$(LATEX)	$(TEX_FILE)	||:
