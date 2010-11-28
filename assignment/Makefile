@@ -74,7 +74,6 @@ clean:
 	# The classes
 	rm -f -- Manifest.txt
 	rm -f -- $(patsubst %,%.class,$(CLASSES))
-	rm -f -- myrandom/MyRandom.class
 	find . -maxdepth 1 -type f -name '?*$$?*.class' -exec rm -- {} \; # Robust
 
 # The jar archive that lumps it all together
@@ -89,15 +88,6 @@ $(PROJECT_NAME).jar: Manifest.txt $(patsubst %,%.class,$(CLASSES))
 	chmod +x $(PROJECT_NAME).jar 
 
 
-
-## The random program
-#myrandom/MyRandom.class: myrandom/MyRandom.java
-#	cd myrandom && $(JAVAC) MyRandom.java
-#
-## Generate a random number
-#.PHONY: random
-#random: myrandom/MyRandom.class
-#	cd myrandom && java MyRandom $(MYRANDOM_CEILING)
 
 # The jar with all the source code -- should ensure GNU GPL compliance
 $(PROJECT_NAME)-src.jar: $(SOURCE_FILES)
@@ -118,19 +108,6 @@ Manifest.txt: Makefile
 	test \! -e Manifest.txt
 	echo "Main-Class: "$(MAIN_CLASS) > Manifest.txt
 
-
-remove-line-list.txt: myrandom/MyRandom.class
-	rm -f -- remove-line-list.txt
-	{ \
-	    for a in `seq 10`; do \
-		count=$$( ls ./*.java | wc -l ); \
-		file=$$( ls ./*.java | sed -n $$( ./random $$count )p ); \
-		line=$$( ./random $$( wc -l < $$file ) ); \
-		printf "%s: %d\\n" $$file $$line; \
-	    done; \
-	} > remove-line-list.txt
-
-	    #ssed -i.ORIG $$( ./random $$( wc -l < $$file ) )d; \
 
 # Documentation
 #
