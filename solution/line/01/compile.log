@@ -1,0 +1,133 @@
+rm -f -- Manifest.txt
+test \! -e Manifest.txt
+echo "Main-Class: "Main > Manifest.txt
+javac -Xlint Main.java
+./Album.java:21: ';' expected
+    public Album(String aName)
+                              ^
+./Album.java:23: <identifier> expected
+        tracks = new ArrayList<Track>();         
+              ^
+./Album.java:25: class, interface, or enum expected
+    public Album(String aName, String aType, Artist a )
+           ^
+./Album.java:28: class, interface, or enum expected
+        albumType=aType;
+        ^
+./Album.java:29: class, interface, or enum expected
+        artist = a;
+        ^
+./Album.java:30: class, interface, or enum expected
+        tracks = new ArrayList<Track>(); 
+        ^
+./Album.java:31: class, interface, or enum expected
+    }  
+    ^
+./Album.java:33: class, interface, or enum expected
+    public void setAlbumName(String n) 
+           ^
+./Album.java:36: class, interface, or enum expected
+    }
+    ^
+./Album.java:38: class, interface, or enum expected
+    public String getAlbumName()
+           ^
+./Album.java:41: class, interface, or enum expected
+    }
+    ^
+./Album.java:43: class, interface, or enum expected
+   public void setAlbumType(String t) 
+          ^
+./Album.java:46: class, interface, or enum expected
+    }
+    ^
+./Album.java:48: class, interface, or enum expected
+    public String getAlbumType()
+           ^
+./Album.java:51: class, interface, or enum expected
+    }
+    ^
+./Album.java:53: class, interface, or enum expected
+    public void addTrack(Track t)
+           ^
+./Album.java:56: class, interface, or enum expected
+    }
+    ^
+./Album.java:58: class, interface, or enum expected
+     public void setArtist(Artist a) 
+            ^
+./Album.java:61: class, interface, or enum expected
+    }
+    ^
+./Album.java:63: class, interface, or enum expected
+    public Artist getArtist()
+           ^
+./Album.java:66: class, interface, or enum expected
+    }
+    ^
+./Album.java:72: class, interface, or enum expected
+    public double getTracksLength()
+           ^
+./Album.java:75: class, interface, or enum expected
+        for (Track t:tracks)
+        ^
+./Album.java:77: class, interface, or enum expected
+        return length;
+        ^
+./Album.java:78: class, interface, or enum expected
+    }
+    ^
+./Album.java:86: class, interface, or enum expected
+    public double getTracksSize()
+           ^
+./Album.java:89: class, interface, or enum expected
+        for (Track t:tracks)
+        ^
+./Album.java:91: class, interface, or enum expected
+        return size;
+        ^
+./Album.java:92: class, interface, or enum expected
+    }
+    ^
+./Album.java:99: class, interface, or enum expected
+    public double getAvgRating()
+           ^
+./Album.java:102: class, interface, or enum expected
+        for (Track t: tracks)
+        ^
+./Album.java:104: class, interface, or enum expected
+        return rating/tracks.size();
+        ^
+./Album.java:105: class, interface, or enum expected
+    }
+    ^
+./Album.java:23: cannot find symbol
+symbol  : class tracks
+location: class Album
+        tracks = new ArrayList<Track>();         
+        ^
+Main.java:174: cannot find symbol
+symbol  : method setAlbumName(java.lang.String)
+location: class Album
+                album.setAlbumName(str);
+                     ^
+Main.java:178: cannot find symbol
+symbol  : method setAlbumType(java.lang.String)
+location: class Album
+                album.setAlbumType(str);
+                     ^
+Main.java:182: cannot find symbol
+symbol  : method addTrack(Track)
+location: class Album
+                    album.addTrack(t);
+                         ^
+Main.java:185: cannot find symbol
+symbol  : method setArtist(Artist)
+location: class Album
+                album.setArtist(artist);
+                     ^
+./Album.java:21: missing method body, or declare abstract
+    public Album(String aName)
+           ^
+39 errors
+make: *** [Main.class] Error 1

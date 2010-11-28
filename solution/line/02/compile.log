@@ -1,0 +1,13 @@
+rm -f -- Manifest.txt
+test \! -e Manifest.txt
+echo "Main-Class: "Main > Manifest.txt
+javac -Xlint Main.java
+jar cfm MusicLibrary.jar \
+		Manifest.txt \
+		Main.class Album.class Artist.class Library.class Track.class \
+		
+# Decent operating systems can execute JARs directly
+chmod +x MusicLibrary.jar 
+jar cf MusicLibrary-src.jar \
+	    	Manifest.txt \
+		 
