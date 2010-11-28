@@ -1,0 +1,67 @@
+README -- Overall description of this project
+
+XXX Project description
+
+COPYRIGHT
+
+    Copyright © 2008–2009 Jan Minář <rdancer@rdancer.org>
+    Other parties may hold copyright to parts of this project.  See the
+    individual source files for details.
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License version 2 (two),
+    as published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+
+INSTALL
+
+    To compile:
+
+	make
+
+    To run:
+
+	make test
+
+    To create documentation in the doc/ subdirectory:
+
+	make doc
+    
+
+FILES
+
+    Makefile
+	Project Makefile
+
+	The Makefiles are the beginning and the end of this project.  They
+	provide most of the framework, as well as documentation.  Read them.
+
+    README
+	This file
+
+    Test.java
+	Implements the tests, provides the main() entry point, so that the
+	project can be run as a stand-alone program
+
+    *.java
+	Source code
+
+    test-output
+	If tests run correctly, this is the output we expect (used by
+	Makefile's test target)
+
+    doc/
+	The documentation subdirectory.  The documentation is generated from
+	the source code using Javadoc (and possibly other methods)
+
+EOF
