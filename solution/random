@@ -19,16 +19,12 @@
 #
 # USAGE
 #
-# $ ./random <INTEGER>
+# $ ./random <JAVA_SOURCE_FILE>[, ...]
 #
-# Will print a random integer in the interval from 1 (inclusive) to INTEGER
-# (inclusive).
+# Will print pseudorandom choices as per the three sections of the assignment.
 
 set -e
 
-cd myrandom
 make -s MyRandom.class
 
-for ceiling; do
-    java MyRandom "$ceiling"
-done
+java MyRandom "$@"

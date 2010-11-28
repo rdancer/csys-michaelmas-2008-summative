@@ -1,0 +1,78 @@
+01 Album.java 22
+02 Main.java 168
+    Precise
+03 Library.java 14
+    Precise:
+    ./Library.java:14: illegal start of type
+	 * Constructor for objects of class Library
+	 ^
+04 Track.java 80
+    Precise:
+    ./Track.java:81: return outside method
+	    return length;
+	    ^
+
+
+Album.java 30
+Album.java 97
+Library.java 78
+Artist.java 45
+Album.java 30
+Library.java 82
+Main.java 170
+Track.java 36
+Artist.java 13
+Library.java 7
+Library.java 46
+Library.java 8
+Library.java 69
+Artist.java 37
+Library.java 6
+
+Rejected random file/line # combinations:
+Album.java 63 -- empty line
+
+
+Main.java 112 6 'E'
+Library.java 41 15 '}'
+Main.java 203 10 '5'
+Main.java 155 22 'y'
+Library.java 36 11 'Q'
+Library.java 57 16 ')'
+Artist.java 64 29 '4'
+Track.java 111 4 ':'
+Track.java 94 2 ')'
+Album.java 54 26 'g'
+Track.java 14 22 '2'
+Artist.java 37 28 '1'
+Library.java 59 17 'n'
+Main.java 88 88 'y'
+Track.java 31 1 '('
+Artist.java 55 8 '0'
+Main.java 187 25 'x'
+Main.java 38 25 'M'
+Album.java 31 11 '9'
+Album.java 86 5 'Y'
+
+
+File name & variable number & replacement variable number
+Library.java 7 12
+Artist.java 9 7
+Library.java 5 10
+Artist.java 4 6
+Artist.java 6 2
+Track.java 20 10
+Artist.java 5 8
+Artist.java 9 5
+Library.java 3 13
+Album.java 14 12
+Main.java 11 14
+Artist.java 4 3
+Library.java 12 4
+Artist.java 8 2
+Artist.java 5 1
+Library.java 6 3
+Album.java 9 6
+Artist.java 7 5
+Main.java 5 27
+Library.java 9 6
