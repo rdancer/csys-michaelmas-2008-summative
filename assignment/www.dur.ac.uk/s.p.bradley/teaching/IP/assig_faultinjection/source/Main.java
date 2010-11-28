@@ -48,7 +48,7 @@ public class Main
         }
         
         //Sample of loading from a file 
-          else if (Integer.parseInt(str) == 2);
+          else if (Integer.parseInt(str) == 2)
         {
             BufferedReader reader = new BufferedReader(new FileReader("MusicLib.txt"));
             String line = reader.readLine();
