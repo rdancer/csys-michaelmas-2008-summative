@@ -70,7 +70,6 @@
 %	-- the assignment
 \chapter{Abstract}
 \thispagestyle{fancy}
-%This work is in part based on \cite{minar}
 
 In this exercise,\footnote{This is a summative work for the Introduction to Programming module taught at Durham University, UK in Michælmas 2010.}
 we are going to test two commonly understood positions: (1) That strongly typed languages such as {\em Java} fare better than weakly typed languages such as {\em C} when it comes to programming error detection, and (2) that compilers producing unhelpful inaccurate messages due to inherent theoretical difficulty of doing otherwise.  We are going to show that while the former is likely true, the latter is dubious at best.
@@ -123,7 +122,7 @@ The flowchart \ref{flowchart} shows an overview of or workflow in generating the
 
 \section{Generating data sets}
 
-The assignment suggests using the {\em BlueJ} environment, however, it doesn't require it.  We have opted to use our normal Java build environment for compiling and running the code.  This is a {\em Make}-based environment.  This allows us to automate the experiment, and in doing that, improve the quality of the generated data.
+The assignment suggests using the {\em BlueJ} environment, however, it doesn't require it.  We have opted to use our normal Java build environment for compiling and running the code.  This is a {\em GNU Make}-based environment developed for our coursework, in part for the purposes of \cite{minar}.  This allows us to automate the experiment, and in doing that, improve the quality of the generated data.
 
 We are going to be using {\em OpenJDK}, Java version 1.6, running on {\em Ubuntu}.
 \begin{verbatim}
